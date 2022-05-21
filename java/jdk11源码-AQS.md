@@ -1,4 +1,4 @@
-### 摘要
+摘要
 
 - AQS是什么
 - 使用方式
@@ -6,7 +6,7 @@
 
  
 
-### AQS是什么
+### 1 AQS是什么
 
 摘自java doc，简而言之就是该类基于阻塞队列为同步锁的实现提供了框架功能
 
@@ -22,7 +22,7 @@ Provides a framework for implementing blocking locks and related synchronizers (
 
  
 
-### 使用方式
+### 2 使用方式
 
 ```java
 public class MyLock {
@@ -105,7 +105,7 @@ public class MyLock {
 
  
 
-### 源码原理
+### 3 源码原理
 
 大体的思路是从ReentrantLock这个工具类着手
 
@@ -154,7 +154,7 @@ public class AQSTest {
 
  
 
-#### 类图
+#### 3.1 类图
 
 ![img](../img/1150150-20220218001926234-697481967.png)
 
@@ -165,7 +165,7 @@ public class AQSTest {
 
  
 
-#### 构造方法
+#### 3.2 构造方法
 
 ReentrantLock中属性sync，构造方法仅仅是指定sync是FairSync还是NonfairSync的实例，默认是NonFairSync
 
@@ -173,7 +173,7 @@ ReentrantLock中属性sync，构造方法仅仅是指定sync是FairSync还是Non
 
  
 
-#### ReentrantLock#lock(...)方法
+#### 3.3 ReentrantLock#lock(...)方法
 
  
 
@@ -183,7 +183,7 @@ ReentrantLock中属性sync，构造方法仅仅是指定sync是FairSync还是Non
 
 
 
-AQS#acquire(...)
+##### 3.3.1 AQS#acquire(...)
 
 ```java
 public final void acquire(int arg) {
@@ -195,7 +195,7 @@ public final void acquire(int arg) {
 
  
 
-#####  FairSync#tryAcquire(...)
+#####  3.3.2 FairSync#tryAcquire(...)
 
 ```java
 protected final boolean tryAcquire(int acquires) { // 线程尝试上锁 2种情况可以尝试上锁成功 第一:无锁状态 没有其他线程在等待 第二:重入线程
@@ -221,7 +221,7 @@ protected final boolean tryAcquire(int acquires) { // 线程尝试上锁 2种情
 
  
 
-##### NonfairSync#tryAcquire(...)
+##### 3.3.3 NonfairSync#tryAcquire(...)
 
 ```java
 protected final boolean tryAcquire(int acquires) {
@@ -251,7 +251,7 @@ final boolean nonfairTryAcquire(int acquires) {
 
  
 
-AQS#addWaiter(...)
+##### 3.3.4 AQS#addWaiter(...)
 
 ```java
 private Node addWaiter(Node mode) { // 将线程封装成node节点 进入队列中
@@ -274,7 +274,7 @@ private Node addWaiter(Node mode) { // 将线程封装成node节点 进入队列
 
  
 
-##### AQS#acquireQueued(...)
+##### 3.3.5 AQS#acquireQueued(...)
 
 ```java
 final boolean acquireQueued(final Node node, int arg) { // 正常情况该方法返回false 返回的是竞争锁线程的中断状态 true=中断过 false=没有被中断过 一旦检测到某个竞争锁线程被中断过 就对该线程进行中断
@@ -301,4 +301,4 @@ final boolean acquireQueued(final Node node, int arg) { // 正常情况该方法
 
  
 
-#### ReentrantLock#unLock(...)方法
+#### 3.4 ReentrantLock#unLock(...)方法
