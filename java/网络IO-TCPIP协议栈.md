@@ -122,11 +122,11 @@ public class SocketTest {
 }
 ```
 
-###  
+ 
 
 ### 3 网络抓包
 
-####  
+ 
 
 #### 3.1 命令工具
 
@@ -142,7 +142,7 @@ The general format of a TCP protocol line is:
        packet.  Opts are TCP options (e.g., mss 1024).  Len is the length of payload data.
 ```
 
-####  
+ 
 
 #### 3.2 网络接口查询
 
@@ -170,7 +170,7 @@ sudo tcpdump -D
 20.VHC128 [none]
 ```
 
-####  
+ 
 
 #### 3.3 抓包
 
@@ -215,11 +215,11 @@ sudo tcpdump -nn -i lo0 port 9992
 
 尝试了几次抓包都发现在3次握手之后，双方建立了tcp连接之后，服务端都会紧随着发一个空包ack包，这个地方留着明白了再回来填坑(todo)
 
-##  
+ 
 
 ## 二 Socket
 
-###  
+ 
 
 ### 1 服务端代码
 
@@ -324,7 +324,7 @@ public class ClientTest {
 
 当前服务监听着9993这个端口
 
-####  
+ 
 
 #### 3.2 启动一个客户端
 
@@ -332,13 +332,13 @@ public class ClientTest {
 
 ![img](../img/1150150-20220520203607042-1800673066.png)
 
-#####  
+ 
 
 ##### 客户端
 
 ![img](../img/1150150-20220520203537237-1361523972.png)
 
-#####  
+ 
 
 ##### netstat
 
@@ -350,7 +350,7 @@ public class ClientTest {
 2. 客户端侧可以看到一条跟服务端的tcp连接，本机:51466->本机:9993
 3. 服务端其实已经收到了客户端发送的消息，放在了Recv-Q中了
 
-####  
+ 
 
 #### 3.3 再启动一个客户端
 
@@ -358,13 +358,13 @@ public class ClientTest {
 
 ![img](../img/1150150-20220520204214514-119455393.png)
 
-#####  
+ 
 
 ##### 客户端
 
 ![img](../img/1150150-20220520204307171-1360026919.png)
 
-#####  
+ 
 
 ##### netstat
 
